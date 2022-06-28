@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: CardMainArt
+    uniqueID: 3392531039
+    locked: 0
+  - name: CardBG
+    uniqueID: 1900340239
+    locked: 0
+  - name: CardDetails
+    uniqueID: 3685985363
+    locked: 0

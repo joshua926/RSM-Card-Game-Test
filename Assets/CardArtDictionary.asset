@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534fa27bde8b8fc4d8bd90d6e48c3c41, type: 3}
+  m_Name: CardArtDictionary
+  m_EditorClassIdentifier: 
+  imageIDs:
+  - id: 50
+    texture: {fileID: 21300000, guid: 1879e0fcf71275f4b98e8a84279c5b15, type: 3}
+  - id: 77
+    texture: {fileID: 21300000, guid: 5ca126df3a3aed04da5067ad9969c0c6, type: 3}
+  - id: 18
+    texture: {fileID: 21300000, guid: 069195179752f9a468e53e1b0754e8c7, type: 3}

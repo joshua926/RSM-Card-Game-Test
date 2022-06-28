@@ -35,5 +35,57 @@ public class CardOriginal
         public string Type => type;
         public int Value => value;
         public string Target => target;
+        public static string[] KnownTypes = new string[]
+        {
+            "damage",
+            "shield",
+            "strength",
+        };
+        public static string[] KnownTargets = new string[]
+        {
+            "enemy",
+            "self",
+        };
+
+        public string GenerateText()
+        {
+            string target = "";
+            string verb = "";
+            string value = Value.ToString();
+            string resource = "";
+
+            switch (Type)
+            {
+                case "damage":
+                    verb = "take";
+                    resource = "damage";
+                    break;
+                case "shield":
+                    verb = "gain";
+                    resource = "defense";
+                    break;
+                case "strength":
+                    verb = "gain";
+                    resource = "strength";
+                    break;
+                default:
+                    break;
+            }
+
+            switch (Target)
+            {
+                case "enemy":
+                    target = "Your enemy";
+                    verb += "s";
+                    break;
+                case "self":
+                    target = "You";
+                    break;
+                default:
+                    break;
+            }
+
+            return $"{target} {verb} {value} {resource}.";
+        }
     }
 }

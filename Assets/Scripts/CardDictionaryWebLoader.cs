@@ -4,22 +4,22 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Assertions;
 
-public class CardCollectionWebLoader : MonoBehaviour
+public class CardDictionaryWebLoader : MonoBehaviour
 {
     [Header("Loading cards from url: " + defaultURL)]
-    public CardCollection cardCollection;
+    public CardDictionary cardDictionary;
     public bool IsLoaded { get; private set; } = false;
     public const string defaultURL = "https://client.dev.kote.robotseamonster.com/TEST_HARNESS/json_files/cards.json";
 
     void Awake()
     {
-        if (cardCollection)
+        if (cardDictionary)
         {
-        StartCoroutine(Request(defaultURL, cardCollection));
+        StartCoroutine(Request(defaultURL, cardDictionary));
         }
     }
 
-    IEnumerator Request(string url, CardCollection cardCollection)
+    IEnumerator Request(string url, CardDictionary cardCollection)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {

@@ -1,0 +1,1 @@
+- Card dimensions: 6.3 x 8.8 x .03 (if thickness is used)

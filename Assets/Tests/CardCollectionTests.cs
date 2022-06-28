@@ -4,15 +4,15 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class CardCollectionTests
+public class CardDictionaryTests
 {
     [Test]
     public void LoadFromJSON_GetCardByID()
     {        
-        var collection = ScriptableObject.CreateInstance<CardCollection>();
+        var collection = ScriptableObject.CreateInstance<CardDictionary>();
         collection.LoadFromJSON(json);
 
-        CompareCard(collection.GetCardByID(0),
+        CompareCard(collection.GetCard(0),
             0,
             "sword",
             1,
@@ -21,7 +21,7 @@ public class CardCollectionTests
             "damage",
             6,
             "enemy");
-        CompareCard(collection.GetCardByID(1),
+        CompareCard(collection.GetCard(1),
             1,
             "shield",
             2,
@@ -30,7 +30,7 @@ public class CardCollectionTests
             "shield",
             5,
             "self");
-        CompareCard(collection.GetCardByID(2),
+        CompareCard(collection.GetCard(2),
             2,
             "fortitude",
             2,

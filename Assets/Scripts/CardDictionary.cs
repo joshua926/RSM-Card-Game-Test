@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class CardCollection : ScriptableObject
+public class CardDictionary : ScriptableObject
 {
     [SerializeField, NonReorderable] CardOriginal[] cards;
     Dictionary<int, CardOriginal> dictionary;
+    
+    public bool TryGetCard(int id, out CardOriginal card)
+    {
+        if (dictionary == null)
+        {
+            CreateDictionary();
+        }
+        return dictionary.TryGetValue(id, out card);
+    }
 
     /// <summary>
-    /// Returns card by ID. If ID does not exist then returns null.
+    /// If ID does not exist then this will return null.
     /// </summary>
-    public CardOriginal GetCardByID(int id)
+    public CardOriginal GetCard(int id)
     {
         if (dictionary == null)
         {
