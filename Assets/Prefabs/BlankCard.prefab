@@ -633,8 +633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dbd263e40840c4a8303109e2cfe27a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardCollection: {fileID: 11400000, guid: 653af39a0f4573a439b44962ef8f7f22, type: 2}
-  cardArtCollection: {fileID: 11400000, guid: 1806d14d306ca804ea634b28ea2a92ea, type: 2}
+  cardDictionary: {fileID: 11400000, guid: 653af39a0f4573a439b44962ef8f7f22, type: 2}
+  cardArtDictionary: {fileID: 11400000, guid: 1806d14d306ca804ea634b28ea2a92ea, type: 2}
   mainArtRenderer: {fileID: 2589129378309357716}
   costUI: {fileID: 2589129377967845451}
   nameUI: {fileID: 2589129379031479989}

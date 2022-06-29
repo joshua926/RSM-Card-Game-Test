@@ -6,20 +6,23 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class EventSO : ScriptableObject
 {
-    [SerializeField] UnityEvent evt;
+    List<EventListenerMB> listeners = new List<EventListenerMB>();
 
     public void RaiseEvent()
     {
-        evt?.Invoke();
+        for (int i = listeners.Count - 1; i >= 0; i--)
+        {
+            listeners[i].OnRaiseEvent();
+        }
     }
 
-    public void Subscribe(UnityAction action)
+    public void Register(EventListenerMB listener)
     {
-        evt.AddListener(action);
+        listeners.Add(listener);
     }
 
-    public void Unsubscribe(UnityAction action)
+    public void Unregister(EventListenerMB listener)
     {
-        evt.RemoveListener(action);
+        listeners.Remove(listener);
     }
 }

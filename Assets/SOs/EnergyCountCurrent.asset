@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b20cea99394334f854cba566c8d238, type: 3}
-  m_Name: OnStartTurn
+  m_Script: {fileID: 11500000, guid: 8b9ec066f715fcd4ba99af2390f1b04f, type: 3}
+  m_Name: EnergyCountCurrent
   m_EditorClassIdentifier: 
-  evt:
-    m_PersistentCalls:
-      m_Calls: []
+  startValue: 4

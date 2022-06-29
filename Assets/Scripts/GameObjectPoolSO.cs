@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class GameObjectPool : ScriptableObject
+public class GameObjectPoolSO : ScriptableObject
 {
     [SerializeField] GameObject prefab;
     public int growSize = 5;
-    Queue<GameObject> pool;
+    Queue<GameObject> pool = new Queue<GameObject>();
 
     private void Awake()
     {
-        pool = new Queue<GameObject>(growSize);
-        Debug.Log("SO awake");
+        GrowPool();
     }
 
     private void OnDisable()

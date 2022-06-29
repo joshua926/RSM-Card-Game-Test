@@ -8,11 +8,13 @@ public class CardDictionaryTests
 {
     [Test]
     public void LoadFromJSON_GetCardByID()
-    {        
-        var collection = ScriptableObject.CreateInstance<CardDictionary>();
-        collection.LoadFromJSON(json);
+    {
+        var cardDictionary = ScriptableObject.CreateInstance<CardDictionarySO>();
 
-        CompareCard(collection.GetCard(0),
+        Assert.AreEqual(0, cardDictionary.Count);        
+        cardDictionary.LoadFromJSON(ExampleJSON);
+        Assert.AreEqual(3, cardDictionary.Count);
+        CompareCard(
             0,
             "sword",
             1,
@@ -21,7 +23,7 @@ public class CardDictionaryTests
             "damage",
             6,
             "enemy");
-        CompareCard(collection.GetCard(1),
+        CompareCard(
             1,
             "shield",
             2,
@@ -30,8 +32,7 @@ public class CardDictionaryTests
             "shield",
             5,
             "self");
-        CompareCard(collection.GetCard(2),
-            2,
+        CompareCard(2,
             "fortitude",
             2,
             "power",
@@ -40,21 +41,22 @@ public class CardDictionaryTests
             2,
             "self");
 
-        ScriptableObject.DestroyImmediate(collection, false);
-    }    
+        ScriptableObject.DestroyImmediate(cardDictionary, false);
 
-    void CompareCard(CardOriginal card, int id, string name, int cost, string type, int image_id, string effectType, int effectValue, string effectTarget)
-    {
-        Assert.AreEqual(id, card.Id);
-        Assert.AreEqual(name, card.Name);
-        Assert.AreEqual(cost, card.Cost);
-        Assert.AreEqual(image_id, card.ImageId);
-        Assert.AreEqual(effectType, card.GetEffect(0).Type);
-        Assert.AreEqual(effectValue, card.GetEffect(0).Value);
-        Assert.AreEqual(effectTarget, card.GetEffect(0).Target);
+        void CompareCard(int id, string name, int cost, string type, int image_id, string effectType, int effectValue, string effectTarget)
+        {
+            Assert.That(cardDictionary.TryGetCard(id, out var card));
+            Assert.AreEqual(id, card.Id);
+            Assert.AreEqual(name, card.Name);
+            Assert.AreEqual(cost, card.Cost);
+            Assert.AreEqual(image_id, card.ImageId);
+            Assert.AreEqual(effectType, card.GetEffect(0).Type);
+            Assert.AreEqual(effectValue, card.GetEffect(0).Value);
+            Assert.AreEqual(effectTarget, card.GetEffect(0).Target);
+        }
     }
 
-    static string json = @"
+    public static string ExampleJSON = @"
     {
       ""cards"": [
         {
