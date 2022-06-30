@@ -10,7 +10,7 @@ public class CardDictionaryWebLoaderTests
     public IEnumerator CardDictionaryWebLoaderTestsWithEnumeratorPasses()
     {
         var cards = ScriptableObject.CreateInstance<CardDictionarySO>();
-        cards.TryGetCard(0, out var card);
+        var card = cards.GetCardDuplicate(0);
         Assert.That(cards.Count == 0);
 
         var loader = new GameObject().AddComponent<CardDictionaryWebLoaderMB>();

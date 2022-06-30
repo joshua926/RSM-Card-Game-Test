@@ -15,16 +15,12 @@ public class CardInitializerMB : MonoBehaviour
     [SerializeField] TextMeshProUGUI typeUI;
     [SerializeField] TextMeshProUGUI textUI;
 
-    public CardOriginal Card { get; private set; }
+    public Card Card { get; private set; }
 
-    public void Init(int cardID)
+    public void Init(Card card)
     {
-        bool foundCard = cardDictionary.TryGetCard(cardID, out var card);
-        Assert.IsTrue(foundCard, $"Failed to find card in Card Dictionary with ID {cardID}.");
         Card = card;
-        bool foundCardArt = cardArtDictionary.TryGetArt(Card.ImageId, out var artSprite);
-        Assert.IsTrue(foundCardArt, $"Failed to find card art in Card Art Dictionary with ImageID {Card.ImageId}.");
-        mainArtRenderer.sprite = artSprite;
+        mainArtRenderer.sprite = cardArtDictionary.GetCardArt(Card.ImageId);
         costUI.text = Card.Cost.ToString();
         nameUI.text = Card.Name;
         typeUI.text = Card.Type;

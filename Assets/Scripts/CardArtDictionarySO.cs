@@ -34,10 +34,17 @@ public class CardArtDictionarySO : ScriptableObject
         }
     }
 
-    public bool TryGetArt(int id, out Sprite art)
+    public bool ContainsID(int image_id)
+    {
+        return dictionary.ContainsKey(image_id);
+    }
+
+    public Sprite GetCardArt(int image_id)
     {
         Assert.IsTrue(Count != 0, $"Card Art Dictionary count is 0.");
-        return dictionary.TryGetValue(id, out art);
+        bool artExists = ContainsID(image_id);
+        Assert.IsTrue(artExists, $"Card art with image_id {image_id} does not exist.");
+        return dictionary[image_id];
     }
 
     [System.Serializable]

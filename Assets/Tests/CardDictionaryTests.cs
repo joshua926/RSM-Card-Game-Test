@@ -45,7 +45,8 @@ public class CardDictionaryTests
 
         void CompareCard(int id, string name, int cost, string type, int image_id, string effectType, int effectValue, string effectTarget)
         {
-            Assert.That(cardDictionary.TryGetCard(id, out var card));
+            Assert.That(cardDictionary.ContainsID(id));
+            var card = cardDictionary.GetCardDuplicate(id);
             Assert.AreEqual(id, card.Id);
             Assert.AreEqual(name, card.Name);
             Assert.AreEqual(cost, card.Cost);

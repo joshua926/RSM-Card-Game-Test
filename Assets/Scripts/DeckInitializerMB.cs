@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class DeckInitializerMB : MonoBehaviour
 {
+    [SerializeField] CardDictionarySO cardDictionary;
     [SerializeField] CardListSO cardList;
     [SerializeField] RuntimeSetOfCardsSO deck;
     [SerializeField] bool shuffleDeck = true;
@@ -14,7 +16,8 @@ public class DeckInitializerMB : MonoBehaviour
     {
         for (int i = 0; i < cardList.Count; i++)
         {
-            deck.Add(new Card(cardList.GetCardOriginal(i)));
+            int cardID = cardList.GetCardID(i);
+            deck.Add(cardDictionary.GetCardDuplicate(cardID));
         }
         if (shuffleDeck)
         {

@@ -6,8 +6,8 @@ using UnityEngine.Assertions;
 [CreateAssetMenu]
 public class CardDictionarySO : ScriptableObject
 {
-    [SerializeField, NonReorderable] CardOriginal[] cards;
-    Dictionary<int, CardOriginal> dictionary = new Dictionary<int, CardOriginal>();
+    [SerializeField, NonReorderable] Card[] cards;
+    Dictionary<int, Card> dictionary = new Dictionary<int, Card>();
     public int Count => dictionary.Count;
 
     public void Init()
@@ -24,10 +24,18 @@ public class CardDictionarySO : ScriptableObject
         }
     }
 
-    public bool TryGetCard(int id, out CardOriginal card)
+    public bool ContainsID(int cardID)
+    {
+        return dictionary.ContainsKey(cardID);
+    }
+
+    public Card GetCardDuplicate(int cardID)
     {
         Assert.IsTrue(Count != 0, "Card Dictionary count is 0. Are you trying to access it before it has finished being loaded from a web request?");
-        return dictionary.TryGetValue(id, out card);
+        bool cardExists = ContainsID(cardID);
+        Assert.IsTrue(cardExists, $"Card ID {cardID} does not exist.");
+        var card = dictionary[cardID];
+        return card.Duplicate();
     }
 
     /// <summary>

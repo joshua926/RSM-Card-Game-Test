@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CardInitializerMB))]
 public class CardInitializerManualTest : MonoBehaviour
 {
+    [SerializeField] CardDictionarySO cardDictionary;
     [SerializeField] int cardID;
     CardInitializerMB initializer;
 
@@ -26,6 +27,7 @@ public class CardInitializerManualTest : MonoBehaviour
 
     void InitCard()
     {
-        initializer.Init(cardID);
+        var card = cardDictionary.GetCardDuplicate(cardID);
+        initializer.Init(card);
     }
 }

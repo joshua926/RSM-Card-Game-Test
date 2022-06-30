@@ -30,6 +30,13 @@ public class RuntimeSetSO<T> : ScriptableObject
         items.RemoveAt(index);
     }
 
+    public T GetAndRemoveAt(int index)
+    {
+        T item = items[index];
+        items.RemoveAt(index);
+        return item;
+    }
+
     public void Shuffle()
     {
         for (int i = 0; i < items.Count; i++)
