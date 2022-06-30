@@ -40,4 +40,21 @@ public class RuntimeSetSO<T> : ScriptableObject
             items[i] = temp;
         }
     }
+
+#if UNITY_EDITOR
+    // Unfortunately ScriptableObjects do not necessarily get reset (even their Properties)
+    // when switching to and from play mode in the editor so this should handle that.    
+    private void OnEnable()
+    {
+        UnityEditor.EditorApplication.playModeStateChanged += ResetAfterPlay;
+    }
+
+    void ResetAfterPlay(UnityEditor.PlayModeStateChange state)
+    {
+        if (this)
+        {
+            items.Clear();
+        }
+    }
+#endif
 }

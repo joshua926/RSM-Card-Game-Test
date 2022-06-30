@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 public class CardInitializerMB : MonoBehaviour
 {
     public CardDictionarySO cardDictionary;
     public CardArtDictionarySO cardArtDictionary;
-    [SerializeField] SpriteRenderer mainArtRenderer;
+    [SerializeField] Image mainArtRenderer;
     [SerializeField] TextMeshProUGUI costUI;
     [SerializeField] TextMeshProUGUI nameUI;
     [SerializeField] TextMeshProUGUI typeUI;
     [SerializeField] TextMeshProUGUI textUI;
-
 
     public CardOriginal Card { get; private set; }
 

@@ -7,6 +7,8 @@ public class DeckInitializerMB : MonoBehaviour
     [SerializeField] CardListSO cardList;
     [SerializeField] RuntimeSetOfCardsSO deck;
     [SerializeField] bool shuffleDeck = true;
+    [SerializeField] EventSO OnDeckChanged;
+    [SerializeField] EventSO OnTurnStarted;
 
     public void InitDeck()
     {
@@ -18,10 +20,7 @@ public class DeckInitializerMB : MonoBehaviour
         {
             deck.Shuffle();
         }
-        Debug.Log("Deck loaded");
-        for (int i = 0; i < deck.Count; i++)
-        {
-            Debug.Log(deck[i].Original.Name);
-        }
+        OnDeckChanged.RaiseEvent();
+        OnTurnStarted.RaiseEvent();
     }
 }

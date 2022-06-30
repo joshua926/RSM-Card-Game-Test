@@ -102,3 +102,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardList: {fileID: 11400000, guid: af294d1054fd45a4ebd74afa4cd9bd2c, type: 2}
   deck: {fileID: 11400000, guid: 3853234a7eb38b6419a37975d316a851, type: 2}
+  shuffleDeck: 1
+  OnStartedTurn: {fileID: 11400000, guid: 332b39adf779ff64abf0f8809385ad06, type: 2}
