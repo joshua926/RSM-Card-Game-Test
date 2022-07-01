@@ -9,8 +9,7 @@ public class DeckInitializerMB : MonoBehaviour
     [SerializeField] CardListSO cardList;
     [SerializeField] RuntimeSetOfCardsSO deck;
     [SerializeField] bool shuffleDeck = true;
-    [SerializeField] EventSO OnDeckChanged;
-    [SerializeField] EventSO OnTurnStarted;
+    [SerializeField] EventRaiser eventRaiser;
 
     public void InitDeck()
     {
@@ -23,7 +22,6 @@ public class DeckInitializerMB : MonoBehaviour
         {
             deck.Shuffle();
         }
-        OnDeckChanged.RaiseEvent();
-        OnTurnStarted.RaiseEvent();
+        eventRaiser.RaiseEvents();
     }
 }

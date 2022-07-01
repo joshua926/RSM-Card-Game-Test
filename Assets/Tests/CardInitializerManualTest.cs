@@ -28,6 +28,6 @@ public class CardInitializerManualTest : MonoBehaviour
     void InitCard()
     {
         var card = cardDictionary.GetCardDuplicate(cardID);
-        initializer.Init(card);
+        //initializer.Init(card);
     }
 }

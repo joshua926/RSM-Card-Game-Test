@@ -38,6 +38,7 @@ public class Card
             id = id,
             name = name,
             cost = cost,
+            type = type,
             image_id = image_id,
             effects = effectsCopy,
         };

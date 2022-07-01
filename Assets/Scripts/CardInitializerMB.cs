@@ -14,10 +14,13 @@ public class CardInitializerMB : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameUI;
     [SerializeField] TextMeshProUGUI typeUI;
     [SerializeField] TextMeshProUGUI textUI;
+    [SerializeField] TransformAnimatorMB drawAnimator;
+    [SerializeField] TransformAnimatorMB mouseOverAnimator;
+    [SerializeField] TransformAnimatorMB discardAnimator;
 
     public Card Card { get; private set; }
 
-    public void Init(Card card)
+    public void Init(Card card, Transform handTransform, Transform mouseOverTransform, Transform discardPileTransform)
     {
         Card = card;
         mainArtRenderer.sprite = cardArtDictionary.GetCardArt(Card.ImageId);
@@ -25,6 +28,9 @@ public class CardInitializerMB : MonoBehaviour
         nameUI.text = Card.Name;
         typeUI.text = Card.Type;
         textUI.text = GenerateEffectText();
+        drawAnimator.destination = handTransform;
+        mouseOverAnimator.destination = mouseOverTransform;
+        discardAnimator.destination = discardPileTransform;
     }
 
     string GenerateEffectText()
