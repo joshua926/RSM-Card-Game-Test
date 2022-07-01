@@ -4,15 +4,15 @@ A simple demo of a card game drawing cards to hand, discarding cards, and shuffl
 
 ## Player Turn
 
-1. Draw phase
+- Draw phase
   - while(hand < 4)
     - if(deck == 0)
       - shuffle discard
     - draw card
-2. Play Phase
+- Play Phase
   - Can play card if enough energy
   - Can click 'End Turn' to  end turn
-3. End Turn Phase
+- End Turn Phase
   - Discard hand
   - Go to next turn
 
