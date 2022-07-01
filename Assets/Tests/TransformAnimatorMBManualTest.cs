@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RSMCardGame;
+using GeneralPurpose;
 
-public class TransformAnimatorMBManualTest : MonoBehaviour
+namespace Tests
 {
-    [SerializeField] float delayTime = 2;
-    [SerializeField] TransformAnimatorMB[] animations;
-
-    private void Start()
+    public class TransformAnimatorMBManualTest : MonoBehaviour
     {
-        StartCoroutine(StartAfterDelay());
-    }
+        [SerializeField] float delayTime = 2;
+        [SerializeField] TransformAnimatorMB[] animations;
 
-    IEnumerator StartAfterDelay()
-    {
-        yield return new WaitForSeconds(delayTime);
-        for (int i = 0; i < animations.Length; i++)
+        private void Start()
         {
-            animations[i].StartAnimation();
-            yield return new WaitForSeconds(animations[i].duration);
+            StartCoroutine(StartAfterDelay());
+        }
+
+        IEnumerator StartAfterDelay()
+        {
+            yield return new WaitForSeconds(delayTime);
+            for (int i = 0; i < animations.Length; i++)
+            {
+                animations[i].StartAnimation();
+                yield return new WaitForSeconds(animations[i].duration);
+            }
         }
     }
 }

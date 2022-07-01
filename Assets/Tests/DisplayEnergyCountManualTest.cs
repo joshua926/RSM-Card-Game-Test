@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RSMCardGame;
+using GeneralPurpose;
 
-public class DisplayEnergyCountManualTest : MonoBehaviour
+namespace Tests
 {
-    [SerializeField] IntSO energyCountCurrent;
-    [SerializeField] EventSO onEnergyCountChanged;
-    [SerializeField] float timeInterval = 2f;
-    [SerializeField] int changeValue = -1;
-    [SerializeField] int loopCount = 4;
-
-    private void Start()
+    public class DisplayEnergyCountManualTest : MonoBehaviour
     {
-        StartCoroutine(ChangeEnergyCount());
-    }
+        [SerializeField] IntSO energyCountCurrent;
+        [SerializeField] EventSO onEnergyCountChanged;
+        [SerializeField] float timeInterval = 2f;
+        [SerializeField] int changeValue = -1;
+        [SerializeField] int loopCount = 4;
 
-    IEnumerator ChangeEnergyCount()
-    {
-        for (int i = 0; i < loopCount; i++)
+        private void Start()
         {
-            yield return new WaitForSeconds(timeInterval);
-            energyCountCurrent.Value += changeValue;
-            onEnergyCountChanged.RaiseEvent();
+            StartCoroutine(ChangeEnergyCount());
+        }
+
+        IEnumerator ChangeEnergyCount()
+        {
+            for (int i = 0; i < loopCount; i++)
+            {
+                yield return new WaitForSeconds(timeInterval);
+                energyCountCurrent.Value += changeValue;
+                onEnergyCountChanged.RaiseEvent();
+            }
         }
     }
 }

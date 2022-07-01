@@ -1,10 +1,11 @@
 {
     "name": "Tests",
-    "rootNamespace": "",
+    "rootNamespace": "Tests",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Main"
+        "RSMCardGame",
+        "GeneralPurpose"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

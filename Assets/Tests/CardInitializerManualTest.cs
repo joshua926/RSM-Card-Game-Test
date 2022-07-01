@@ -1,33 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RSMCardGame;
+using GeneralPurpose;
 
-[RequireComponent(typeof(CardInitializerMB))]
-public class CardInitializerManualTest : MonoBehaviour
+namespace Tests
 {
-    [SerializeField] CardDictionarySO cardDictionary;
-    [SerializeField] int cardID;
-    CardInitializerMB initializer;
-
-    void Start()
+    [RequireComponent(typeof(CardInitializerMB))]
+    public class CardInitializerManualTest : MonoBehaviour
     {
-        initializer = GetComponent<CardInitializerMB>();
-        StartCoroutine(WaitForCardDictionaryToLoadFromWeb());
-    }
+        [SerializeField] CardDictionarySO cardDictionary;
+        [SerializeField] int cardID;
+        CardInitializerMB initializer;
 
-    IEnumerator WaitForCardDictionaryToLoadFromWeb()
-    {
-        float startTime = Time.realtimeSinceStartup;
-        while(initializer.cardDictionary.Count == 0 && Time.realtimeSinceStartup - startTime < 3)
+        void Start()
         {
-            yield return null;
+            initializer = GetComponent<CardInitializerMB>();
+            StartCoroutine(WaitForCardDictionaryToLoadFromWeb());
         }
-        InitCard();
-    }
 
-    void InitCard()
-    {
-        var card = cardDictionary.GetCardDuplicate(cardID);
-        //initializer.Init(card);
+        IEnumerator WaitForCardDictionaryToLoadFromWeb()
+        {
+            float startTime = Time.realtimeSinceStartup;
+            while (initializer.cardDictionary.Count == 0 && Time.realtimeSinceStartup - startTime < 3)
+            {
+                yield return null;
+            }
+            InitCard();
+        }
+
+        void InitCard()
+        {
+            var card = cardDictionary.CreateCard(cardID);
+            //initializer.Init(card);
+        }
     }
 }
