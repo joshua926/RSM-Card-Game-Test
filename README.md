@@ -52,3 +52,5 @@ A simple demo of a card game drawing cards to hand, discarding cards, and shuffl
     - Return to same hand slot
     
 ## Code Design
+
+- The TurnMediatorMB class is the central class that dicatates event orders. Start here to follow the code flow.
