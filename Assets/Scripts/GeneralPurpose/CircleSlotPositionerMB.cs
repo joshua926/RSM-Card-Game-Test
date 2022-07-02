@@ -18,12 +18,11 @@ namespace GeneralPurpose
 
         void OnValidate()
         {
-            SetChildrenTransformsOnCircle(shouldRaiseEventOnCompletion: false);
-        }
-
-        void Start()
-        {
-            SetChildrenTransformsOnCircle();
+            if (SlotCount > 0)
+            {
+                SetChildrenTransformsOnCircle(shouldRaiseEventOnCompletion: false);
+            }
+                
         }
 
         public Transform GetSlot(int index)
@@ -31,19 +30,42 @@ namespace GeneralPurpose
             return transform.GetChild(index);
         }
 
+        public void IncreaseSlotsToCount(int count)
+        {
+            int delta = Mathf.Max(count - SlotCount, 0);
+            for (int i = 0; i < delta; i++)
+            {
+                AddSlot();
+            }
+        }
+
         public void AddSlot()
         {
             var child = new GameObject("Circle Slot");
-            child.transform.SetParent(transform);
+            child.transform.localScale = Vector3.one;
+            child.transform.SetParent(transform, false);
             child.transform.SetAsLastSibling();
             SetChildrenTransformsOnCircle();
+        }
+
+        public void RemoveAllSlots()
+        {
+            for (int i = SlotCount - 1; i >= 0; i--)
+            {
+                RemoveSlotAt(i);
+            }
+        }
+
+        public void RemoveLastSlot()
+        {
+            RemoveSlotAt(SlotCount - 1);
         }
 
         public void RemoveSlotAt(int index)
         {
             var child = transform.GetChild(index);
             child.SetParent(null);
-            Destroy(child);
+            Destroy(child.gameObject);
             SetChildrenTransformsOnCircle();
         }
 
@@ -55,7 +77,7 @@ namespace GeneralPurpose
             float endAngle = arcCenterDegrees + (arcLengthDegrees / 2);
             for (int i = 0; i < itemCount; i++)
             {
-                float percent = (float)i / (itemCount - 1);
+                float percent = (float)i / Mathf.Max(itemCount - 1, 1);
                 float degrees = Mathf.Lerp(startAngle, endAngle, percent);
                 float radians = degrees * Mathf.Deg2Rad;
                 Vector3 direction = new Vector3(

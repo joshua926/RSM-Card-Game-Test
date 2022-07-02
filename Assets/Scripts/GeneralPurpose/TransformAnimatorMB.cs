@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Assertions;
 
 namespace GeneralPurpose
@@ -12,12 +13,11 @@ namespace GeneralPurpose
 #endif
         [Tooltip("Must not be a child of the transform being animated.")]
         public Transform destination;
-        [Tooltip("An event to raise upon completion of this animation. It is OK if it is missing.")]
-        public EventSO onAnimationCompleted_optional;
         [Min(0)] public float duration = 1f;
         public AnimationCurve positionCurve;
         public AnimationCurve rotationCurve;
         public AnimationCurve scaleCurve;
+        public UnityEvent onAnimationCompleted;
         [System.NonSerialized] public TRS source;
         Coroutine currentAnimation;
         float startTime;
@@ -54,7 +54,7 @@ namespace GeneralPurpose
             StopCoroutine(currentAnimation);
             if (shouldRaiseAnimationCompletedEvent)
             {
-                onAnimationCompleted_optional?.RaiseEvent();
+                onAnimationCompleted?.Invoke();
             }
         }
 
@@ -69,7 +69,7 @@ namespace GeneralPurpose
                 InterpolatePosition(percentOfDuration);
                 yield return null;
             }
-            onAnimationCompleted_optional?.RaiseEvent();
+            onAnimationCompleted?.Invoke();
         }
 
         void InterpolateLocalScale(float percentOfDuration)

@@ -11,7 +11,7 @@ namespace RSMCardGame
     {
         [Header("Loading cards from url: " + defaultURL)]
         [SerializeField] CardDictionarySO cardDictionary;
-        [SerializeField] PlayerTurnMediatorSO turnMediator;
+        [SerializeField] TurnMediatorMB turnMediator;
         public const string defaultURL = "https://client.dev.kote.robotseamonster.com/TEST_HARNESS/json_files/cards.json";
 
         void Awake()

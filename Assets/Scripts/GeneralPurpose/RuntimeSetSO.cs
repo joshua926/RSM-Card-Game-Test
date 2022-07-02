@@ -50,6 +50,11 @@ namespace GeneralPurpose
             }
         }
 
+        public void Clear()
+        {
+            items.Clear();
+        }
+
 #if UNITY_EDITOR
         // Unfortunately ScriptableObjects do not necessarily get reset (even their Properties)
         // when switching to and from play mode in the editor so this should handle that.    
@@ -60,9 +65,9 @@ namespace GeneralPurpose
 
         void ResetAfterPlay(UnityEditor.PlayModeStateChange state)
         {
-            if (this)
+            if (this && state == UnityEditor.PlayModeStateChange.ExitingPlayMode)
             {
-                items.Clear();
+                Clear();
             }
         }
 #endif

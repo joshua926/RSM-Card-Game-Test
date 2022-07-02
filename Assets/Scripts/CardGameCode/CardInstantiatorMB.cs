@@ -11,38 +11,24 @@ namespace RSMCardGame
     /// </summary>
     public class CardInstantiatorMB : MonoBehaviour
     {
-        [SerializeField] GameObject cardPrefab;
-        [SerializeField] Transform parentCanvas;
-        [SerializeField] Transform transformToCopy;
-        [SerializeField] CircleSlotPositionerMB handPositions;
-        [SerializeField] CircleSlotPositionerMB mouseHoverPositions;
-        [SerializeField] Transform discardPileTransform;
+        [SerializeField] GameObject card;
+        [SerializeField] Transform cardParent;
         [SerializeField] PoolMB cardPool;
 
-        public void InstantiateCard(Card card, int handSlot)
+        public void InstantiateCard()
         {
             AssertDependencies();
 
-            var cardGO = cardPool.Get(parentCanvas);
-            var cardInitializer = cardGO.GetComponent<CardInitializerMB>();
-            cardInitializer.transform.position = transformToCopy.position;
-            cardInitializer.transform.rotation = transformToCopy.rotation;
-            cardInitializer.transform.localScale = transformToCopy.localScale;
-            cardInitializer.Init(
-                card,
-                handSlot,
-                handPositions,
-                mouseHoverPositions,
-                discardPileTransform);
-            cardInitializer.drawAnimator.StartAnimation();
+            var cardGO = cardPool.Get(cardParent);
+            var cardInitializer = cardGO.GetComponent<CardMB>();
+            cardInitializer.Init();
+            cardInitializer.StartDrawAnimation();
         }
 
         void AssertDependencies()
         {
-            Assert.IsNotNull(cardPrefab);
-            Assert.IsNotNull(cardPrefab.GetComponent<CardInitializerMB>());
-            Assert.IsNotNull(parentCanvas);
-            Assert.IsNotNull(parentCanvas.GetComponent<Canvas>());
+            Assert.IsNotNull(cardParent);
+            Assert.IsNotNull(cardPool);
         }
     }
 }

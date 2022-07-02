@@ -39,18 +39,24 @@ namespace GeneralPurpose
             return go;
         }
 
-        public void Return(GameObject gameObject)
+        public void Return(GameObject gameObject, bool resetTransform = true)
         {
             gameObject.SetActive(false);
             gameObject.transform.SetParent(transform);
             pool.Add(gameObject);
+            if (resetTransform)
+            {
+                gameObject.transform.localPosition = prefab.transform.localPosition;
+                gameObject.transform.localRotation = prefab.transform.localRotation;
+                gameObject.transform.localScale = prefab.transform.localScale;
+            }
         }
 
         public void GrowPool()
         {
             for (int i = 0; i < growSize; i++)
             {
-                Return(Instantiate(prefab, transform));
+                Return(Instantiate(prefab, transform, true));
             }
         }
 

@@ -6,23 +6,24 @@ using GeneralPurpose;
 
 namespace Tests
 {
-    [RequireComponent(typeof(CardInitializerMB))]
+    [RequireComponent(typeof(CardMB))]
     public class CardInitializerManualTest : MonoBehaviour
     {
         [SerializeField] CardDictionarySO cardDictionary;
+        [SerializeField] float waitTimeForDictionaryLoadingBeforeFailure = 2;
         [SerializeField] int cardID;
-        CardInitializerMB initializer;
+        CardMB initializer;
 
         void Start()
         {
-            initializer = GetComponent<CardInitializerMB>();
+            initializer = GetComponent<CardMB>();
             StartCoroutine(WaitForCardDictionaryToLoadFromWeb());
         }
 
         IEnumerator WaitForCardDictionaryToLoadFromWeb()
         {
             float startTime = Time.realtimeSinceStartup;
-            while (initializer.cardDictionary.Count == 0 && Time.realtimeSinceStartup - startTime < 3)
+            while (cardDictionary.Count == 0 && Time.realtimeSinceStartup - startTime < waitTimeForDictionaryLoadingBeforeFailure)
             {
                 yield return null;
             }
@@ -31,8 +32,10 @@ namespace Tests
 
         void InitCard()
         {
-            var card = cardDictionary.CreateCard(cardID);
-            //initializer.Init(card);
+            var hand = ScriptableObject.CreateInstance<RuntimeSetOfCardsSO>();
+            hand.Add(cardDictionary.CreateCard(cardID));
+            initializer.Init();
+            Destroy(hand);
         }
     }
 }
